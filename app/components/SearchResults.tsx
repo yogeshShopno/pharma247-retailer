@@ -1,7 +1,38 @@
 import { Building2, Phone } from 'lucide-react'
 import mockResults from './mockResults'
 
-export default function SearchResults({ setSelectedWholesaler }) {
+export type WholesalerDetails = {
+  ownerName: string
+  mobile: string
+  email: string
+  fullAddress: string
+  rating: number
+  totalProducts: number
+  establishedYear: number
+  verified: boolean
+  deliveryAvailable: boolean
+}
+
+export type SearchResult = {
+  id: number
+  itemName: string
+  brandName: string
+  saltName: string
+  quantity: number
+  price: number
+  wholesaler: string
+  area: string
+  city: string
+  distance: number
+  lastUpdate: string
+  wholesalerDetails: WholesalerDetails
+}
+
+export type SearchResultsProps = {
+  setSelectedWholesaler: (result: SearchResult) => void
+}
+
+export default function SearchResults({ setSelectedWholesaler }:SearchResultsProps) {
   return (
     <div className="max-w-6xl mx-auto px-4 space-y-4">
       {mockResults.map((r) => (

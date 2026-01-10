@@ -1,6 +1,32 @@
 import { X } from 'lucide-react'
 
-export default function WholesalerModal({ data, onClose }) {
+type WholesalerDetails = {
+  ownerName: string
+  mobile: string
+  email: string
+  fullAddress: string
+  rating: number
+  totalProducts: number
+  establishedYear: number
+  verified: boolean
+  deliveryAvailable: boolean
+}
+
+type Wholesaler = {
+  id: number
+  wholesaler: string
+  distance: number
+  wholesalerDetails: WholesalerDetails
+}
+
+type WholesalerModalProps = {
+  data: Wholesaler
+  onClose: () => void
+}
+
+export default function WholesalerModal({ data, onClose }:WholesalerModalProps) {
+    
+
   return (
     <div className="fixed inset-0 bg-black/60 flex items-center justify-center">
       <div className="bg-white p-6 rounded-xl w-full max-w-xl">
