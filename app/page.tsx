@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-
+import { SearchResult } from './components/SearchResults'
 
 
 import HeroSearch from './components/HeroSearch'
@@ -15,12 +15,10 @@ export default function HomePage() {
   const [location, setLocation] = useState('')
   const [isSearching, setIsSearching] = useState(false)
   const [showResults, setShowResults] = useState(false)
-  const [selectedWholesaler, setSelectedWholesaler] = useState(null)
+  const [selectedWholesaler, setSelectedWholesaler] = useState<SearchResult | null>(null)
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
-
-
       <HeroSearch
         searchQuery={searchQuery}
         location={location}
@@ -31,7 +29,7 @@ export default function HomePage() {
         setShowResults={setShowResults}
         setSelectedWholesaler={setSelectedWholesaler}
       />
-
+      
       <QuickStats />
 
       {isSearching && <SearchLoading searchQuery={searchQuery} />}

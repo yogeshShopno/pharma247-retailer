@@ -28,7 +28,7 @@ export default function WholesalerModal({ data, onClose }:WholesalerModalProps) 
     
 
   return (
-    <div className="fixed inset-0 bg-black/60 flex items-center justify-center">
+    <div className="fixed inset-0 py-4 bg-black/60 flex items-center justify-center">
       <div className="bg-white p-6 rounded-xl w-full max-w-xl">
         <button onClick={onClose} className="float-right">
           <X />
