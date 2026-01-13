@@ -30,7 +30,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased" suppressHydrationWarning>
           <Script
-          src={`https://maps.googleapis.com/maps/api/js?key=AIzaSyD-MkbHqrEeOkgBE5VSGMjeYpSEF5OYTwA&libraries=places`}
+          src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_MAP_KEY}`}
           strategy="beforeInteractive"
         />
         <Header />
