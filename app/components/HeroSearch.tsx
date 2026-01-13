@@ -1,5 +1,6 @@
 import { Search, MapPin } from 'lucide-react'
 import type { GeoLocation } from '@/app/page'
+import { useEffect, useRef } from 'react'
 
 export type HeroSearchProps = {
     searchQuery: string
@@ -12,6 +13,14 @@ export type HeroSearchProps = {
     setSelectedWholesaler: (value: null) => void
 }
 
+declare global {
+  interface Window {
+    google: any
+  }
+}
+
+
+
 export default function HeroSearch({
     searchQuery,
     location,
@@ -21,7 +30,9 @@ export default function HeroSearch({
     setIsSearching,
     setShowResults,
     setSelectedWholesaler,
-}: HeroSearchProps) {
+    
+}: HeroSearchProps 
+) {
     const handleSearch = (e: any) => {
         e.preventDefault()
         if (!searchQuery) return
@@ -32,6 +43,58 @@ export default function HeroSearch({
             setIsSearching(false)
             setShowResults(true)
         }, 500)
+    }
+  const inputRef = useRef<HTMLInputElement | null>(null)
+  const autocompleteRef = useRef<any>(null)
+  const debounceTimer = useRef<any>(null)
+
+    useEffect(() => {
+      if (!window.google || !inputRef.current) return
+  
+      autocompleteRef.current =
+        new window.google.maps.places.Autocomplete(inputRef.current, {
+          types: ['geocode'],
+          componentRestrictions: { country: 'in' },
+        })
+  
+      autocompleteRef.current.addListener('place_changed', handlePlaceChanged)
+  
+      const input = inputRef.current
+  
+      // 👉 Auto-trigger on Enter
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Enter') {
+          e.preventDefault()
+          window.google.maps.event.trigger(input, 'focus')
+          window.google.maps.event.trigger(input, 'keydown', { keyCode: 13 })
+        }
+      }
+  
+      input.addEventListener('keydown', handleKeyDown)
+  
+      return () => {
+        input.removeEventListener('keydown', handleKeyDown)
+      }
+    }, [])
+  
+    // 👉 Debounced handler
+    const handlePlaceChanged = () => {
+      if (debounceTimer.current) clearTimeout(debounceTimer.current)
+  
+      debounceTimer.current = setTimeout(() => {
+        const place = autocompleteRef.current.getPlace()
+        if (!place?.geometry) return
+  
+        const lat = place.geometry.location.lat()
+        const lng = place.geometry.location.lng()
+        const address = place.formatted_address || ''
+  
+        console.log('Latitude:', lat)
+        console.log('Longitude:', lng)
+setLocation({ lat, lng })
+        console.log('location:', location)
+  
+      }, 400) // debounce delay
     }
 
     return (
@@ -47,8 +110,7 @@ export default function HeroSearch({
                             <input
                                 type="text"
                                 placeholder="Enter your location (pincode or area)"
-                                // value={location}
-                                // onChange={(e) => setLocation(e.target.value)}
+                                   ref={inputRef}
                                 className="flex-1 py-3 outline-none text-slate-700 placeholder:text-slate-400"
                             />
                         </div>

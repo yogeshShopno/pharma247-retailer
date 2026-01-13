@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Script from "next/script";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,6 +29,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased" suppressHydrationWarning>
+          <Script
+          src={`https://maps.googleapis.com/maps/api/js?key=AIzaSyD-MkbHqrEeOkgBE5VSGMjeYpSEF5OYTwA&libraries=places`}
+          strategy="beforeInteractive"
+        />
         <Header />
         <main>{children}</main>
         <Footer />
