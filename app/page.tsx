@@ -23,8 +23,8 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen  bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
-      <div className="text-center pt-12  animate-fadeIn">
-        <h2 className="text-5xl font-bold text-slate-800 mb-4 leading-tight">
+      <div className="text-center pt-16  animate-fadeIn">
+        <h2 className="text-5xl font-bold text-slate-800 leading-tight">
           Find Medicines<br />
           <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
             Near You, Instantly
@@ -43,15 +43,14 @@ export default function HomePage() {
         setSelectedWholesaler={setSelectedWholesaler}
       />
 
-      <QuickStats />
+     
 
-      {isSearching && <SearchLoading searchQuery={searchQuery} />}
-
-      {showResults && (
+      {isSearching ? <SearchLoading searchQuery={searchQuery}/> :showResults ?(
         <SearchResults
           setSelectedWholesaler={setSelectedWholesaler}
-        />
-      )}
+        /> 
+      ):
+       <QuickStats />}
 
       {selectedWholesaler && (
         <WholesalerModal

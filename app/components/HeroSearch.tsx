@@ -35,47 +35,9 @@ export default function HeroSearch({
     }
 
     return (
-        <section className="max-w-4xl mx-auto  pt-16 pb-12 px-4">
+        <section className="max-w-4xl mx-auto  pt-12 pb-12 px-4">
 
             <form onSubmit={handleSearch} className="space-y-4 animate-slideUp">
-                <div className="bg-white rounded-2xl shadow-xl shadow-blue-500/10 border border-slate-200/60 overflow-hidden">
-                    <div className="flex items-center p-2">
-                        <div className="flex-1 flex items-center space-x-3 px-4">
-
-                            <Search className="w-6 h-6 text-slate-400" />
-                            <input
-                                type="text"
-                                placeholder="Search by medicine name (e.g, Dolo 650)"
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                                className="flex-1 py-4 text-lg outline-none text-slate-700 placeholder:text-slate-400"
-                            />
-
-                        </div>
-                        <button
-                            type="submit"
-                            disabled={isSearching}
-                            className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-8 py-4 rounded-xl font-semibold shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/40 disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
-                        >
-                            {isSearching ? (
-                                <>
-                                    <div className="w-5 h-5 border-3 border-white/30 border-t-white rounded-full animate-spin"></div>
-                                    <span>Searching...</span>
-                                </>
-                            ) : (
-                                <>
-                                    <Search className="w-5 h-5" />
-                                    <span>Search</span>
-                                </>
-                            )}
-                        </button>
-                    </div>
-
-                </div>
-
-
-
-
 
                 {/* Location Filter */}
                 <div className="bg-white rounded-2xl shadow-lg shadow-slate-500/10 border border-slate-200/60 overflow-hidden">
@@ -104,6 +66,39 @@ export default function HeroSearch({
                             </select>
                         </div>
 
+                    </div>
+                </div>
+
+                <div className="bg-white rounded-2xl shadow-xl shadow-blue-500/10 border border-slate-200/60 overflow-hidden">
+                    <div className="flex items-center p-2">
+                        <div className="flex-1 flex items-center space-x-3 px-4">
+
+                            <Search className="w-6 h-6 text-slate-400" />
+                            <input
+                                type="text"
+                                placeholder="Search by medicine name (e.g, Dolo 650)"
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                className="flex-1 py-4 text-lg outline-none text-slate-700 placeholder:text-slate-400"/>
+
+                        </div>
+                        <button
+                            type="submit"
+                            disabled={isSearching}
+                            className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-8 py-4 rounded-xl font-semibold shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/40 disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
+                        >
+                            {isSearching ? (
+                                <>
+                                    <div className="w-5 h-5 border-3 border-white/30 border-t-white rounded-full animate-spin"></div>
+                                    <span>Searching...</span>
+                                </>
+                            ) : (
+                                <>
+                                    <Search className="w-5 h-5" />
+                                    <span>Search</span>
+                                </>
+                            )}
+                        </button>
                     </div>
                 </div>
             </form>

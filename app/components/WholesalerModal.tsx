@@ -134,7 +134,7 @@ export default function WholesalerModal({ data, onClose }: WholesalerModalProps)
                   <p className="text-slate-700 leading-relaxed">
                     {data.wholesalerDetails.fullAddress}
                   </p>
-                  <button className=" mt-4 flex items-center space-x-2 text-white hover:text-white font-semibold transition-colors">
+                  <button className="bg-gradient-to-br from-slate-50 to-blue-50 mt-4 flex items-center space-x-2 text-white hover:text-white font-semibold transition-colors">
                     <Navigation className="w-4 h-4" />
                     <span>Get Directions</span>
                   </button>
@@ -143,36 +143,31 @@ export default function WholesalerModal({ data, onClose }: WholesalerModalProps)
 
               {/* Business Stats */}
               <div>
-                <h3 className="text-xl font-semibold text-slate-800 mb-4 flex items-center space-x-2">
-                  <TrendingUp className="w-4 h-4 text-blue-600" />
-                  <span>Business Information</span>
-                </h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl py-2 px-4  border border-blue-200">
-                    <div className="text-2xl font-bold text-blue-600 mb-1">
-                      {data.wholesalerDetails.totalProducts.toLocaleString()}
-                    </div>
-                    <div className="text-sm text-slate-600 font-medium">Total Products</div>
+
+                {/* Stats Card */}
+                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl py-4 px-6 border border-blue-200 mb-4">
+                  <div className="text-3xl font-bold text-blue-600 mb-1">
+                    {data.wholesalerDetails.totalProducts.toLocaleString()}
                   </div>
-                  <div className="w-full flex flex-col sm:flex-row gap-3 pt-4">
-                    <button className="flex-1 flex items-center justify-center space-x-2 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-4 py-2.5 rounded-xl font-semibold shadow-lg shadow-green-500/30 transition-all duration-300 hover:shadow-xl">
-                      <Phone className="w-4 h-4" />
-                      <span>Call Now</span>
-                    </button>
-                    <button className="flex-1 flex items-center justify-center space-x-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-4 py-2.5 rounded-xl font-semibold shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-xl">
-                      <MessageCircle className="w-4 h-4" />
-                      <span>WhatsApp</span>
-                    </button>
-                    <button className="flex-1 flex items-center justify-center space-x-2 bg-white hover:bg-slate-50 border-2 border-slate-300 hover:border-blue-600 text-slate-700 hover:text-blue-600 px-4 py-2.5 rounded-xl font-semibold transition-all duration-300">
-                      <Mail className="w-4 h-4" />
-                      <span>Email</span>
-                    </button>
-                  </div>
+                  <div className="text-sm text-slate-600 font-medium">Total Products</div>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <button className="flex-1 flex items-center justify-center space-x-2 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-4 py-2.5 rounded-xl font-semibold shadow-lg shadow-green-500/30 transition-all duration-300 hover:shadow-xl">
+                    <Phone className="w-4 h-4" />
+                    <span>Call Now</span>
+                  </button>
+                  <button className="flex-1 flex items-center justify-center space-x-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-4 py-2.5 rounded-xl font-semibold shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-xl">
+                    <MessageCircle className="w-4 h-4" />
+                    <span>WhatsApp</span>
+                  </button>
+                  <button className="flex-1 flex items-center justify-center space-x-2 bg-white hover:bg-slate-50 border-2 border-slate-300 hover:border-blue-600 text-slate-700 hover:text-blue-600 px-4 py-2.5 rounded-xl font-semibold transition-all duration-300">
+                    <Mail className="w-4 h-4" />
+                    <span>Email</span>
+                  </button>
                 </div>
               </div>
-
-              {/* Action Buttons */}
-
             </div>
           </div>
         </div>

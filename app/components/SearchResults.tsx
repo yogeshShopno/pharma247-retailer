@@ -35,6 +35,7 @@ export type SearchResultsProps = {
 export default function SearchResults({ setSelectedWholesaler }: SearchResultsProps) {
   return (
     <div className="max-w-6xl mx-auto px-4 py-4 space-y-4">
+      <h1 className='text-2xl font-bold text-slate-800'>Search results... </h1>
       {mockResults.map((result, index) => (
         <div
           key={result.id}
@@ -47,16 +48,6 @@ export default function SearchResults({ setSelectedWholesaler }: SearchResultsPr
               <div className="flex-1">
                 <div className="flex items-center space-x-3 mb-2">
                   <h4 className="text-xl font-bold text-slate-800">{result.itemName}</h4>
-                </div>
-                {/* <div className="flex flex-wrap gap-2 text-sm text-slate-600">
-                          <span className="font-medium">{result.brandName}</span>
-                          <span className="text-slate-400">•</span>
-                          <span>{result.saltName}</span>
-                        </div> */}
-              </div>
-              <div className="text-right">
-                <div className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                  {/* ₹{result.price} */}
                 </div>
               </div>
             </div>
