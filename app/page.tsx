@@ -56,7 +56,7 @@ export default function HomePage() {
       {selectedWholesaler && (
         <WholesalerModal
           data={selectedWholesaler}
-          
+
           onClose={() => setSelectedWholesaler(null)}
         />
       )}

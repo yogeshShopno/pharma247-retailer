@@ -85,8 +85,8 @@ export default function HeroSearch({
                             <input
                                 type="text"
                                 placeholder="Enter your location (pincode or area)"
-                                value={location}
-                                onChange={(e) => setLocation(e.target.value)}
+                                // value={location}
+                                // onChange={(e) => setLocation(e.target.value)}
                                 className="flex-1 py-3 outline-none text-slate-700 placeholder:text-slate-400"
                             />
                         </div>
