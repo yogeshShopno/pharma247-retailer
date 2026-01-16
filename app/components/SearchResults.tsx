@@ -1,42 +1,16 @@
 import { Building2, Phone } from 'lucide-react'
-import mockResults from './mockResults'
 
-export type WholesalerDetails = {
-  
-  ownerName: string
-  mobile: string
-  email: string
-  fullAddress: string
+import type { SearchResult} from '@/app/page'
 
-  totalProducts: number
-  establishedYear: number
-  deliveryAvailable: boolean
+type SearchResultsProps = {
+  searchResults: SearchResult[]
 }
 
-export type SearchResult = {
-  id: number
-  name: string
-  owner_name: string
-  email: string
-  mobile_number: string
-  quantity: number
-  price: number
-  wholesaler: string
-  address: string
-  city: string
-  distance: number
-
-}
-
-export type SearchResultsProps = {
-  setSelectedWholesaler: (result: SearchResult) => void
-}
-
-export default function SearchResults({ setSelectedWholesaler }: SearchResultsProps) {
+export default function SearchResults( { searchResults }: SearchResultsProps) {
   return (
     <div className="max-w-6xl mx-auto px-4 py-4 space-y-4">
       <h1 className='text-2xl font-bold text-slate-800'>Search results... </h1>
-      {mockResults.map((result, index) => (
+      {searchResults.map((result, index) => (
         <div
           key={result.id}
           className="bg-white rounded-2xl shadow-lg shadow-slate-500/10 border border-slate-200/60 overflow-hidden hover:shadow-xl hover:shadow-blue-500/20 transition-all duration-300 animate-slideUp"

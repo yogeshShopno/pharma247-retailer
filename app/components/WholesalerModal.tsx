@@ -1,26 +1,11 @@
 import { X } from 'lucide-react'
 import { Search, MapPin, Phone, Clock, Package, AlertCircle, TrendingUp, Mail, Building2, User, Shield, Star, CheckCircle, Navigation, MessageCircle, Globe } from 'lucide-react'
-type WholesalerDetails = {
-  ownerName: string
-  mobile: string
-  email: string
-  fullAddress: string
- 
-  totalProducts: number
-  establishedYear: number
 
-  deliveryAvailable: boolean
-}
+import type { SearchResult} from '@/app/page'
 
-type Wholesaler = {
-  id: number
-  wholesaler: string
-  distance: number
-  wholesalerDetails: WholesalerDetails
-}
 
 type WholesalerModalProps = {
-  data: Wholesaler
+  data: SearchResult
   onClose: () => void
 }
 
@@ -33,8 +18,8 @@ export default function WholesalerModal({ data , onClose }: WholesalerModalProps
         <button onClick={onClose} className="float-right">
           <X />
         </button>
-        <h2 className="text-xl font-bold">{data.wholesaler}</h2>
-        <p>{data.wholesalerDetails.fullAddress}</p>
+        <h2 className="text-xl font-bold">{data.owner_name}</h2>
+        <p>{data.address}</p>
       </div>
       {/* Wholesaler Detail Modal */}
       {data && (
@@ -54,7 +39,7 @@ export default function WholesalerModal({ data , onClose }: WholesalerModalProps
                 </div>
                 <div className="flex">
                   <h2 className="text-lg font-semibold text-white ">
-                    {data.wholesaler}
+                    {data.owner_name}
                   </h2>
                 </div>
               </div>
@@ -77,7 +62,7 @@ export default function WholesalerModal({ data , onClose }: WholesalerModalProps
                       <div>
                         <div className="text-xs text-slate-500 font-semibold uppercase">Owner Name</div>
                         <div className="font-semibold text-slate-800">
-                          {data.wholesalerDetails.ownerName}
+                          {data.owner_name}
                         </div>
                       </div>
                     </div>
@@ -90,7 +75,7 @@ export default function WholesalerModal({ data , onClose }: WholesalerModalProps
                       <div>
                         <div className="text-xs text-slate-500 font-semibold uppercase">Mobile</div>
                         <div className="font-semibold text-slate-800">
-                          {data.wholesalerDetails.mobile}
+                          {data.owner_name}
                         </div>
                       </div>
                     </div>
@@ -103,7 +88,7 @@ export default function WholesalerModal({ data , onClose }: WholesalerModalProps
                       <div>
                         <div className="text-xs text-slate-500 font-semibold uppercase">Email</div>
                         <div className="font-semibold text-slate-800">
-                          {data.wholesalerDetails.email}
+                          {data.email}
                         </div>
                       </div>
                     </div>
@@ -132,7 +117,7 @@ export default function WholesalerModal({ data , onClose }: WholesalerModalProps
                 </h3>
                 <div className="bg-gradient-to-br from-slate-50 to-blue-50 rounded-xl p-5 border border-slate-200">
                   <p className="text-slate-700 leading-relaxed">
-                    {data.wholesalerDetails.fullAddress}
+                    {data.address}
                   </p>
                   <button className="bg-gradient-to-br from-slate-50 to-blue-50 mt-4 flex items-center space-x-2 text-white hover:text-white font-semibold transition-colors">
                     <Navigation className="w-4 h-4" />
@@ -147,7 +132,7 @@ export default function WholesalerModal({ data , onClose }: WholesalerModalProps
                 {/* Stats Card */}
                 <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl py-4 px-6 border border-blue-200 mb-4">
                   <div className="text-3xl font-bold text-blue-600 mb-1">
-                    {data.wholesalerDetails.totalProducts.toLocaleString()}
+                    {/* {data.totalProducts.toLocaleString()} */}
                   </div>
                   <div className="text-sm text-slate-600 font-medium">Total Products</div>
                 </div>

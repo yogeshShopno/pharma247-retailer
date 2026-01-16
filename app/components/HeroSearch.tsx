@@ -1,7 +1,8 @@
 import { Search, MapPin, CloudCog } from 'lucide-react'
-import type { GeoLocation } from '@/app/page'
+import type { GeoLocation ,SearchResult} from '@/app/page'
 import { useEffect, useRef } from 'react'
 import { api } from '../lib/api'
+
 export type HeroSearchProps = {
     distance: string
     setDistance: (value: string) => void
@@ -12,7 +13,7 @@ export type HeroSearchProps = {
     setLocation: (value: GeoLocation | null) => void
     setIsSearching: (value: boolean) => void
     setShowResults: (value: boolean) => void
-    setSelectedWholesaler: (value: any) => void
+  setSearchResults: (value: SearchResult[]) => void
 }
 
 declare global {
@@ -31,7 +32,8 @@ export default function HeroSearch({
     setLocation,
     setIsSearching,
     setShowResults,
-    setSelectedWholesaler,
+    setSearchResults
+   
 }: HeroSearchProps
 ) {
     const handleSearch = async (e: any) => {
@@ -40,7 +42,7 @@ export default function HeroSearch({
         if (!searchQuery) return
         setIsSearching(true)
         setShowResults(false)
-        setSelectedWholesaler(null)
+    
         setTimeout(() => {
 
         }, 500)
@@ -57,7 +59,9 @@ export default function HeroSearch({
                 method: 'POST',
                 data: payload, // ✅ correct
             })
-            setSelectedWholesaler(response.data.data)
+
+            setSearchResults(response.data.data)
+            
         } catch {
             console.error(e)
 

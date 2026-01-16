@@ -1,16 +1,30 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { SearchResult } from './components/SearchResults'
 import HeroSearch from './components/HeroSearch'
 import QuickStats from './components/QuickStats'
 import SearchResults from './components/SearchResults'
 import SearchLoading from './components/SearchLoading'
-// import WholesalerModal from './components/WholesalerModal'
+import WholesalerModal from './components/WholesalerModal'
 
 export type GeoLocation = {
   lat: number
   lng: number
+}
+
+export type SearchResult = {
+  id: number
+  name: string
+  owner_name: string
+  email: string
+  mobile_number: string
+  quantity: number
+  price: number
+  wholesaler: string
+  address: string
+  city: string
+  distance: number
+
 }
 
 export default function HomePage() {
@@ -18,11 +32,11 @@ export default function HomePage() {
   const [searchQuery, setSearchQuery] = useState('')
   const [isSearching, setIsSearching] = useState(false)
   const [showResults, setShowResults] = useState(false)
-  const [selectedWholesaler, setSelectedWholesaler] = useState<SearchResult | null>(null)
   const [location, setLocation] = useState<GeoLocation | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([])
 
-    useEffect(() => {
+  useEffect(() => {
     if (!navigator.geolocation) {
       setError('Geolocation is not supported')
       return
@@ -66,23 +80,27 @@ export default function HomePage() {
         setLocation={setLocation}
         setIsSearching={setIsSearching}
         setShowResults={setShowResults}
-        setSelectedWholesaler={setSelectedWholesaler}
+        setSearchResults={setSearchResults}
+
+
       />
 
 
 
-      {isSearching ? <SearchLoading searchQuery={searchQuery} /> : showResults ? (
-        <SearchResults
-          setSelectedWholesaler={setSelectedWholesaler}
-        />
-      ) :
-        <QuickStats />}
+      {isSearching ? (
+        <SearchLoading searchQuery={searchQuery} />
+      ) : showResults ? (
+        <SearchResults searchResults={searchResults} />
+      ) : (
+        <QuickStats />
+      )}
 
-      {/* {selectedWholesaler && (
+
+      {/* {searchResults && (
         <WholesalerModal
-          data={selectedWholesaler}
+          data={searchResults}
 
-          onClose={() => setSelectedWholesaler(null)}
+          onClose={() => setSearchResults(null)}
         />
       )} */}
 
