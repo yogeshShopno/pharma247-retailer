@@ -12,7 +12,7 @@ export type HeroSearchProps = {
     setLocation: (value: GeoLocation | null) => void
     setIsSearching: (value: boolean) => void
     setShowResults: (value: boolean) => void
-setSelectedWholesaler: (value: any) => void
+    setSelectedWholesaler: (value: any) => void
 }
 
 declare global {
@@ -73,45 +73,45 @@ export default function HeroSearch({
     const debounceTimer = useRef<any>(null)
 
     useEffect(() => {
-  if (!inputRef.current) return
+        if (!inputRef.current) return
 
-  const interval = setInterval(() => {
-    if (
-      window.google &&
-      window.google.maps &&
-      window.google.maps.places
-    ) {
-      clearInterval(interval)
+        const interval = setInterval(() => {
+            if (
+                window.google &&
+                window.google.maps &&
+                window.google.maps.places
+            ) {
+                clearInterval(interval)
 
-      autocompleteRef.current =
-        new window.google.maps.places.Autocomplete(inputRef.current!, {
-          types: ['geocode'],
-          componentRestrictions: { country: 'in' },
-        })
+                autocompleteRef.current =
+                    new window.google.maps.places.Autocomplete(inputRef.current!, {
+                        types: ['geocode'],
+                        componentRestrictions: { country: 'in' },
+                    })
 
-      autocompleteRef.current.addListener(
-        'place_changed',
-        handlePlaceChanged
-      )
-    }
-  }, 100)
+                autocompleteRef.current.addListener(
+                    'place_changed',
+                    handlePlaceChanged
+                )
+            }
+        }, 100)
 
-  return () => clearInterval(interval)
-}, [])
+        return () => clearInterval(interval)
+    }, [])
 
 
     // 👉 Debounced handler
-   const handlePlaceChanged = () => {
-  if (!autocompleteRef.current) return
+    const handlePlaceChanged = () => {
+        if (!autocompleteRef.current) return
 
-  const place = autocompleteRef.current.getPlace()
-  if (!place?.geometry?.location) return
+        const place = autocompleteRef.current.getPlace()
+        if (!place?.geometry?.location) return
 
-  setLocation({
-    lat: place.geometry.location.lat(),
-    lng: place.geometry.location.lng(),
-  })
-}
+        setLocation({
+            lat: place.geometry.location.lat(),
+            lng: place.geometry.location.lng(),
+        })
+    }
 
 
     return (
