@@ -1,8 +1,10 @@
-import { Search, MapPin } from 'lucide-react'
+import { Search, MapPin, CloudCog } from 'lucide-react'
 import type { GeoLocation } from '@/app/page'
 import { useEffect, useRef } from 'react'
 import { api } from '../lib/api'
 export type HeroSearchProps = {
+    distance: string
+    setDistance: (value: string) => void
     searchQuery: string
     location: GeoLocation | null
     isSearching: boolean
@@ -20,6 +22,8 @@ declare global {
 }
 
 export default function HeroSearch({
+    distance,
+    setDistance,
     searchQuery,
     location,
     isSearching,
@@ -32,27 +36,36 @@ export default function HeroSearch({
 ) {
     const handleSearch = async (e: any) => {
         e.preventDefault()
-        // if (!searchQuery) return
-        // setIsSearching(true)
-        // setShowResults(false)
-        // setSelectedWholesaler(null)
-        // setTimeout(() => {
-        //     setIsSearching(false)
-        //     setShowResults(true)
-        // }, 500)
+
+        if (!searchQuery) return
+        setIsSearching(true)
+        setShowResults(false)
+        setSelectedWholesaler(null)
+        setTimeout(() => {
+
+        }, 500)
 
         const payload = {
-            page:1,
+            page: 1,
             item_name: searchQuery,
             latitude: location?.lat,
             longitude: location?.lng,
-            distance: 70, // replace with selected value if you store it in state
+            distance: distance, // replace with selected value if you store it in state
         }
-        const response = await api('search-item', {
-            method: 'POST',
-              data: payload, // ✅ correct
-        })
-        console.log(response.data.data)
+        try {
+            const response = await api('search-item', {
+                method: 'POST',
+                data: payload, // ✅ correct
+            })
+            setSelectedWholesaler(response.data.data)
+        } catch {
+            console.error(e)
+
+        } finally {
+            setIsSearching(false)
+            setShowResults(true)
+        }
+
 
     }
     const inputRef = useRef<HTMLInputElement | null>(null)
@@ -124,7 +137,8 @@ export default function HeroSearch({
                         <div className="border-l border-slate-200 px-2">
                             <select
                                 className="px-4 py-3 text-sm text-slate-500 font-medium bg-transparent outline-none cursor-pointer"
-                                defaultValue="10"
+                                value={distance}
+                                onChange={(e) => setDistance(e.target.value)}
                             >
                                 <option value="10">10KM</option>
                                 <option value="25">25KM</option>

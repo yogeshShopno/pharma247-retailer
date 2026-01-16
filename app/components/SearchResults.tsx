@@ -2,6 +2,7 @@ import { Building2, Phone } from 'lucide-react'
 import mockResults from './mockResults'
 
 export type WholesalerDetails = {
+  
   ownerName: string
   mobile: string
   email: string
@@ -9,23 +10,22 @@ export type WholesalerDetails = {
 
   totalProducts: number
   establishedYear: number
-
   deliveryAvailable: boolean
 }
 
 export type SearchResult = {
   id: number
-  itemName: string
-  brandName: string
-
+  name: string
+  owner_name: string
+  email: string
+  mobile_number: string
   quantity: number
   price: number
   wholesaler: string
-  area: string
+  address: string
   city: string
   distance: number
-  lastUpdate: string
-  wholesalerDetails: WholesalerDetails
+
 }
 
 export type SearchResultsProps = {
@@ -47,7 +47,7 @@ export default function SearchResults({ setSelectedWholesaler }: SearchResultsPr
             <div className="flex items-start justify-between mb-4">
               <div className="flex-1">
                 <div className="flex items-center space-x-3 mb-2">
-                  <h4 className="text-xl font-bold text-slate-800">{result.itemName}</h4>
+                  <h4 className="text-xl font-bold text-slate-800">{result.name}</h4>
                 </div>
               </div>
             </div>
@@ -59,13 +59,13 @@ export default function SearchResults({ setSelectedWholesaler }: SearchResultsPr
                   <div className="text-xs text-slate-500 font-semibold uppercase tracking-wide mb-1">
                     Wholesaler
                   </div>
-                  <div className="font-bold text-slate-800">{result.wholesaler}</div>
+                  <div className="font-bold text-slate-800">{result.owner_name}</div>
                 </div>
                 <div>
                   <div className="text-xs text-slate-500 font-semibold uppercase tracking-wide mb-1">
                     Location
                   </div>
-                  <div className="font-bold text-slate-800">{result.area}, {result.city}</div>
+                  <div className="font-bold text-slate-800">{result.address}</div>
                 </div>
                 <div>
                   <div className="text-xs text-slate-500 font-semibold uppercase tracking-wide mb-1">
@@ -78,7 +78,7 @@ export default function SearchResults({ setSelectedWholesaler }: SearchResultsPr
 
             <div className="flex items-center justify-end space-x-3">
               <button
-                onClick={() => setSelectedWholesaler(result)}
+                // onClick={() => setSelectedWholesaler(result)}
                 className="flex items-center space-x-2 bg-white hover:bg-slate-50 border-2 border-slate-300 hover:border-blue-600 text-slate-700 hover:text-blue-600 px-5 py-3 rounded-xl font-semibold transition-all duration-300"
               >
                 <Building2 className="w-4 h-4" />

@@ -24,7 +24,6 @@ apiInstance.interceptors.request.use(
       }
     }
 
-    config.headers?.set('ngrok-skip-browser-warning', 'true')
 
     return config
   },

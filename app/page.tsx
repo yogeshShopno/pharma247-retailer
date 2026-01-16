@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { SearchResult } from './components/SearchResults'
 import HeroSearch from './components/HeroSearch'
 import QuickStats from './components/QuickStats'
@@ -14,12 +14,36 @@ export type GeoLocation = {
 }
 
 export default function HomePage() {
+  const [distance, setDistance] = useState('10')
   const [searchQuery, setSearchQuery] = useState('')
   const [isSearching, setIsSearching] = useState(false)
   const [showResults, setShowResults] = useState(false)
   const [selectedWholesaler, setSelectedWholesaler] = useState<SearchResult | null>(null)
   const [location, setLocation] = useState<GeoLocation | null>(null)
   const [error, setError] = useState<string | null>(null)
+
+    useEffect(() => {
+    if (!navigator.geolocation) {
+      setError('Geolocation is not supported')
+      return
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setLocation({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        })
+      },
+      () => {
+        setError('Location permission denied')
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+      }
+    )
+  }, [])
 
   return (
     <div className="min-h-screen  bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
@@ -33,6 +57,8 @@ export default function HomePage() {
 
       </div>
       <HeroSearch
+        distance={distance}
+        setDistance={setDistance}
         searchQuery={searchQuery}
         location={location}
         isSearching={isSearching}
@@ -43,14 +69,14 @@ export default function HomePage() {
         setSelectedWholesaler={setSelectedWholesaler}
       />
 
-     
 
-      {isSearching ? <SearchLoading searchQuery={searchQuery}/> :showResults ?(
+
+      {isSearching ? <SearchLoading searchQuery={searchQuery} /> : showResults ? (
         <SearchResults
           setSelectedWholesaler={setSelectedWholesaler}
-        /> 
-      ):
-       <QuickStats />}
+        />
+      ) :
+        <QuickStats />}
 
       {/* {selectedWholesaler && (
         <WholesalerModal
@@ -60,7 +86,7 @@ export default function HomePage() {
         />
       )} */}
 
-      <style jsx>{`
+      <style>{`
         @keyframes fadeIn {
           from {
             opacity: 0;
