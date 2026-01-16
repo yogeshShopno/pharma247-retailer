@@ -12,7 +12,7 @@ export type HeroSearchProps = {
     setLocation: (value: GeoLocation | null) => void
     setIsSearching: (value: boolean) => void
     setShowResults: (value: boolean) => void
-    setSelectedWholesaler: (value: null) => void
+setSelectedWholesaler: (value: any) => void
 }
 
 declare global {
@@ -73,49 +73,46 @@ export default function HeroSearch({
     const debounceTimer = useRef<any>(null)
 
     useEffect(() => {
-        if (!window.google || !inputRef.current) return
+  if (!inputRef.current) return
 
-        autocompleteRef.current =
-            new window.google.maps.places.Autocomplete(inputRef.current, {
-                types: ['geocode'],
-                componentRestrictions: { country: 'in' },
-            })
+  const interval = setInterval(() => {
+    if (
+      window.google &&
+      window.google.maps &&
+      window.google.maps.places
+    ) {
+      clearInterval(interval)
 
-        autocompleteRef.current.addListener('place_changed', handlePlaceChanged)
+      autocompleteRef.current =
+        new window.google.maps.places.Autocomplete(inputRef.current!, {
+          types: ['geocode'],
+          componentRestrictions: { country: 'in' },
+        })
 
-        const input = inputRef.current
+      autocompleteRef.current.addListener(
+        'place_changed',
+        handlePlaceChanged
+      )
+    }
+  }, 100)
 
-        // 👉 Auto-trigger on Enter
-        const handleKeyDown = (e: KeyboardEvent) => {
-            if (e.key === 'Enter') {
-                e.preventDefault()
-                window.google.maps.event.trigger(input, 'focus')
-                window.google.maps.event.trigger(input, 'keydown', { keyCode: 13 })
-            }
-        }
+  return () => clearInterval(interval)
+}, [])
 
-        input.addEventListener('keydown', handleKeyDown)
-
-        return () => {
-            input.removeEventListener('keydown', handleKeyDown)
-        }
-    }, [])
 
     // 👉 Debounced handler
-    const handlePlaceChanged = () => {
-        if (debounceTimer.current) clearTimeout(debounceTimer.current)
+   const handlePlaceChanged = () => {
+  if (!autocompleteRef.current) return
 
-        debounceTimer.current = setTimeout(() => {
-            const place = autocompleteRef.current.getPlace()
-            if (!place?.geometry) return
+  const place = autocompleteRef.current.getPlace()
+  if (!place?.geometry?.location) return
 
-            const lat = place.geometry.location.lat()
-            const lng = place.geometry.location.lng()
-            const address = place.formatted_address || ''
-            setLocation({ lat, lng })
+  setLocation({
+    lat: place.geometry.location.lat(),
+    lng: place.geometry.location.lng(),
+  })
+}
 
-        }, 400)
-    }
 
     return (
         <section className="max-w-4xl mx-auto  pt-12 pb-12 px-4">
