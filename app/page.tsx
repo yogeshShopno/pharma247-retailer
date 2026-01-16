@@ -6,7 +6,7 @@ import HeroSearch from './components/HeroSearch'
 import QuickStats from './components/QuickStats'
 import SearchResults from './components/SearchResults'
 import SearchLoading from './components/SearchLoading'
-import WholesalerModal from './components/WholesalerModal'
+// import WholesalerModal from './components/WholesalerModal'
 
 export type GeoLocation = {
   lat: number
@@ -52,13 +52,13 @@ export default function HomePage() {
       ):
        <QuickStats />}
 
-      {selectedWholesaler && (
+      {/* {selectedWholesaler && (
         <WholesalerModal
           data={selectedWholesaler}
 
           onClose={() => setSelectedWholesaler(null)}
         />
-      )}
+      )} */}
 
       <style jsx>{`
         @keyframes fadeIn {

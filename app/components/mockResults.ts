@@ -3,9 +3,8 @@ const mockResults = [
     id: 1,
     itemName: 'asN 40',
     brandName: 'Pantoprazole',
-    saltName: 'Pantoprazole Sodium',
     quantity: 500,
-    price: 145.5,
+   
     wholesaler: 'MediCare Distributors',
     area: 'Satellite',
     city: 'Ahmedabad',
@@ -15,12 +14,12 @@ const mockResults = [
       ownerName: 'Rajesh Kumar',
       mobile: '+91 98765 43210',
       email: 'contact@medicare.com',
-      fullAddress:
+      address:
         '45, Medical Complex, Satellite Road, Ahmedabad - 380015',
-      rating: 4.8,
+   
       totalProducts: 8500,
       establishedYear: 2010,
-      verified: true,
+
       deliveryAvailable: true,
     },
   },
@@ -28,7 +27,7 @@ const mockResults = [
     id: 2,
     itemName: 'laol 60',
     brandName: 'Pantocid',
-    saltName: 'Pantoprazole Sodium',
+   
     quantity: 1200,
     price: 142.0,
     wholesaler: 'HealthPlus Wholesale',
@@ -42,10 +41,9 @@ const mockResults = [
       email: 'info@healthplus.com',
       fullAddress:
         '128, Trade Center, Maninagar, Ahmedabad - 380008',
-      rating: 4.6,
+  
       totalProducts: 12000,
       establishedYear: 2008,
-      verified: true,
       deliveryAvailable: true,
     },
   },
@@ -53,7 +51,7 @@ const mockResults = [
     id: 3,
     itemName: 'jajam 50',
     brandName: 'Pantocid DSR',
-    saltName: 'Pantoprazole + Domperidone',
+   
     quantity: 350,
     price: 168.0,
     wholesaler: 'Prime Pharma Solutions',
@@ -67,18 +65,16 @@ const mockResults = [
       email: 'sales@primepharma.com',
       fullAddress:
         '67, Pharma Hub, Vastrapur, Ahmedabad - 380054',
-      rating: 4.9,
+     
       totalProducts: 15000,
-      establishedYear: 2005,
-      verified: true,
-      deliveryAvailable: false,
+      establishedYear: 2005,    deliveryAvailable: false,
     },
   },
   {
     id: 4,
     itemName: 'ososl 40',
     brandName: 'Pantosec',
-    saltName: 'Pantoprazole Sodium',
+   
     quantity: 800,
     price: 139.5,
     wholesaler: 'Global Medical Traders',
@@ -92,10 +88,10 @@ const mockResults = [
       email: 'contact@globalmed.com',
       fullAddress:
         '234, Commerce Plaza, Navrangpura, Ahmedabad - 380009',
-      rating: 4.5,
+
       totalProducts: 9500,
       establishedYear: 2012,
-      verified: true,
+
       deliveryAvailable: true,
     },
   },

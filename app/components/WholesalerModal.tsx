@@ -5,10 +5,10 @@ type WholesalerDetails = {
   mobile: string
   email: string
   fullAddress: string
-  rating: number
+ 
   totalProducts: number
   establishedYear: number
-  verified: boolean
+
   deliveryAvailable: boolean
 }
 
@@ -24,7 +24,7 @@ type WholesalerModalProps = {
   onClose: () => void
 }
 
-export default function WholesalerModal({ data, onClose }: WholesalerModalProps) {
+export default function WholesalerModal({ data , onClose }: WholesalerModalProps) {
 
 
   return (

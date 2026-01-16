@@ -6,10 +6,10 @@ export type WholesalerDetails = {
   mobile: string
   email: string
   fullAddress: string
-  rating: number
+
   totalProducts: number
   establishedYear: number
-  verified: boolean
+
   deliveryAvailable: boolean
 }
 
@@ -17,7 +17,7 @@ export type SearchResult = {
   id: number
   itemName: string
   brandName: string
-  saltName: string
+
   quantity: number
   price: number
   wholesaler: string

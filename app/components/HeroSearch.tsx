@@ -19,8 +19,6 @@ declare global {
     }
 }
 
-
-
 export default function HeroSearch({
     searchQuery,
     location,
@@ -30,25 +28,31 @@ export default function HeroSearch({
     setIsSearching,
     setShowResults,
     setSelectedWholesaler,
-
 }: HeroSearchProps
 ) {
-    const handleSearch = (e: any) => {
+    const handleSearch = async (e: any) => {
         e.preventDefault()
-        if (!searchQuery) return
-        setIsSearching(true)
-        setShowResults(false)
-        setSelectedWholesaler(null)
-        setTimeout(() => {
-            setIsSearching(false)
-            setShowResults(true)
-        }, 500)
+        // if (!searchQuery) return
+        // setIsSearching(true)
+        // setShowResults(false)
+        // setSelectedWholesaler(null)
+        // setTimeout(() => {
+        //     setIsSearching(false)
+        //     setShowResults(true)
+        // }, 500)
 
-     const response =   api('search-item', {
+        const payload = {
+            page:1,
+            item_name: searchQuery,
+            latitude: location?.lat,
+            longitude: location?.lng,
+            distance: 70, // replace with selected value if you store it in state
+        }
+        const response = await api('search-item', {
             method: 'POST',
+              data: payload, // ✅ correct
         })
-
-        console.log(response)
+        console.log(response.data.data)
 
     }
     const inputRef = useRef<HTMLInputElement | null>(null)
@@ -120,14 +124,13 @@ export default function HeroSearch({
                         <div className="border-l border-slate-200 px-2">
                             <select
                                 className="px-4 py-3 text-sm text-slate-500 font-medium bg-transparent outline-none cursor-pointer"
-                                defaultValue="70"
+                                defaultValue="10"
                             >
-                                <option value="10">5KM - 10KM</option>
-                                <option value="25">10KM - 25KM</option>
-                                <option value="50">25KM - 50KM </option>
-                                <option value="100">50KM - 100KM</option>
-                                <option value="500">100KM - 500KM</option>
-
+                                <option value="10">10KM</option>
+                                <option value="25">25KM</option>
+                                <option value="50">50KM </option>
+                                <option value="100">100KM</option>
+                                <option value="500">500KM</option>
                             </select>
                         </div>
 
