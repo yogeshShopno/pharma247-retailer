@@ -138,7 +138,7 @@ export default function WholesalerModal({
               className="from-blue-600 to-indigo-600 shadow-blue-500/30"
               onClick={() =>
                 window.open(
-                  `https://wa.me/+91${wholesalerDetail?.mobile_number}`,
+                  `https://wa.me/91${wholesalerDetail?.mobile_number}`,
                   '_blank'
                 )
               }
