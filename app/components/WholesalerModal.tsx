@@ -121,15 +121,14 @@ export default function WholesalerModal({ showWholesalerDetail, onClose }: Whole
                     </div>
                   </div>
                   <div className="bg-slate-50 rounded-xl p-4">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                    <div className="flex items-start space-x-3">
+                      <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
                         <MapPin className="w-5 h-5 text-orange-600" />
                       </div>
-                      <div>
-                        <div className="text-xs text-slate-500 font-semibold uppercase">Distance</div>
-                        <div className="font-semibold text-slate-800">
+                      <div className="flex-1 min-w-0">
+                        <div className="text-xs text-slate-500 font-semibold uppercase">Address</div>
+                        <div className="font-semibold text-slate-800 break-words">
                           {wholesalerDetail?.address}
-
                         </div>
                       </div>
                     </div>
@@ -151,19 +150,25 @@ export default function WholesalerModal({ showWholesalerDetail, onClose }: Whole
 
                 {/* Action Buttons */}
                 <div className="flex flex-col sm:flex-row gap-3">
-                  <button className="flex-1 flex items-center justify-center space-x-2 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-4 py-2.5 rounded-xl shadow-lg shadow-green-500/30 transition-all duration-300 hover:shadow-xl">
+                  <button className="flex-1 flex items-center justify-center space-x-2 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-4 py-2.5 rounded-xl shadow-lg shadow-green-500/30 transition-all duration-300 hover:shadow-xl"
+                  onClick={()=>{window.location.href =`tel:+91${wholesalerDetail?.mobile_number}`; }}>
                     <Phone className="w-4 h-4" />
                     <span>Call Now</span>
                   </button>
-                  <button className="flex-1 flex items-center justify-center space-x-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-4 py-2.5 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-xl">
+                  <button className="flex-1 flex items-center justify-center space-x-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-4 py-2.5 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-xl"
+                  onClick={()=>{ window.open(`https://wa.me/${wholesalerDetail?.mobile_number}??text=${encodeURIComponent("hello")}`, '_blank'); }}>
                     <MessageCircle className="w-4 h-4" />
                     <span>WhatsApp</span>
                   </button>
-                  <button className="flex-1 flex items-center justify-center space-x-2 bg-white hover:bg-slate-50 border-2 border-slate-300 hover:border-blue-600 text-slate-700 hover:text-blue-600 px-4 py-2.5 rounded-xl  transition-all duration-300">
+                  <button className="flex-1 flex items-center justify-center space-x-2 bg-white hover:bg-slate-50 border-2 border-slate-300 hover:border-blue-600 text-slate-700 hover:text-blue-600 px-4 py-2.5 rounded-xl  transition-all duration-300"
+                  onClick={()=>{  window.location.href = `mailto:${wholesalerDetail?.email}?subject=${encodeURIComponent("Inquiry")}&body=${encodeURIComponent("hello")}`;}}>
+
                     <Mail className="w-4 h-4" />
                     <span>Email</span>
                   </button>
-                  <button className="flex-1 flex items-center justify-center space-x-2 bg-black hover:bg-white-50 border-2 border-slate-300 hover:border-black text-white px-4 py-2.5 rounded-xl  transition-all duration-300">
+                  <button className="flex-1 flex items-center justify-center space-x-2 bg-black hover:bg-white-50 border-2 border-slate-300 hover:border-black text-white px-4 py-2.5 rounded-xl  transition-all duration-300"
+                  onClick={()=>{ window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(wholesalerDetail?.address)}`, '_blank');}}>
+
                     <MapPin className="w-4 h-4" />
                     <span>Get Direction</span>
                   </button>

@@ -7,7 +7,7 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top Bar */}
         <div className="flex items-center justify-between py-2 border-b border-slate-100">
-          <Link href="/">
+          <Link href="https://pharma247.in/">
             <div className="flex items-center space-x-3">
               <div className=" rounded-xl flex items-center justify-center  ">
                 <img src='/pharmalogo.webp' className='h-14'></img>
