@@ -61,45 +61,18 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 relative overflow-hidden">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-400/10 rounded-full blur-3xl animate-pulse-slow" />
-        <div className="absolute top-60 -left-40 w-96 h-96 bg-indigo-400/10 rounded-full blur-3xl animate-pulse-slow delay-1000" />
-        <div className="absolute bottom-20 right-1/3 w-72 h-72 bg-purple-400/10 rounded-full blur-3xl animate-pulse-slow delay-2000" />
-      </div>
-
       {/* Main content */}
       <div className="relative z-10">
         {/* Hero Section */}
         <div className="text-center pt-8 sm:pt-12 md:pt-16 lg:pt-20 px-4 sm:px-6 animate-fadeIn">
-          {/* Pill icon or medical symbol */}
-          <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 mb-4 sm:mb-6 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl shadow-lg animate-bounce-slow">
-            <svg 
-              className="w-8 h-8 sm:w-10 sm:h-10 text-white" 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24"
-            >
-              <path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                strokeWidth={2} 
-                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" 
-              />
-            </svg>
-          </div>
-
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-800 leading-tight mb-2 sm:mb-3">
+          <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-800 leading-tight mb-2 sm:mb-3">
             Find Medicines
           </h1>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
             <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
               Near You, Instantly
             </span>
           </h2>
-          <p className="mt-4 sm:mt-6 text-sm sm:text-base md:text-lg text-slate-600 max-w-2xl mx-auto px-4">
-            Search thousands of pharmacies and wholesalers in your area. Get real-time availability and pricing.
-          </p>
         </div>
 
         {/* Search Component */}
@@ -134,13 +107,13 @@ export default function HomePage() {
                 We couldn't find any matches for "{searchQuery}". Try adjusting your search or increasing the distance.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-6 sm:mt-8 justify-center">
-                <button 
+                <button
                   onClick={() => setShowResults(false)}
                   className="px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105"
                 >
                   Try New Search
                 </button>
-                
+
               </div>
             </div>
             <div className="mt-8 sm:mt-12 w-full">
@@ -162,27 +135,8 @@ export default function HomePage() {
           </div>
         )}
 
-        {/* Error notification */}
-        {error && (
-          <div className="fixed top-4 right-4 left-4 sm:left-auto sm:w-96 bg-red-50 border-l-4 border-red-500 p-4 rounded-lg shadow-lg animate-slideUp z-50">
-            <div className="flex items-start">
-              <svg className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
-              </svg>
-              <div className="ml-3 flex-1">
-                <p className="text-sm font-medium text-red-800">{error}</p>
-              </div>
-              <button 
-                onClick={() => setError(null)}
-                className="ml-3 flex-shrink-0 text-red-500 hover:text-red-700"
-              >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        )}
+
+       
       </div>
 
       {/* Modal */}
