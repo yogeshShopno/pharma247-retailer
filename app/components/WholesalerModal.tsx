@@ -95,7 +95,7 @@ export default function WholesalerModal({
               />
 
               {/* Address */}
-              <div className="bg-slate-50 rounded-xl p-4 flex gap-3 sm:col-span-2">
+              <div className="bg-slate-50 rounded-xl p-4 flex gap-3">
                 <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center shrink-0">
                   <MapPin className="w-5 h-5 text-orange-600" />
                 </div>
@@ -108,6 +108,7 @@ export default function WholesalerModal({
                   </div>
                 </div>
               </div>
+
             </div>
           </div>
 

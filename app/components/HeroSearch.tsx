@@ -113,7 +113,7 @@ export default function HeroSearch({
 
 
     return (
-        <section className="max-w-4xl mx-auto pt-8 sm:pt-12 pb-10 sm:pb-12 px-4">
+        <section className="max-w-4xl mx-auto pt-8 sm:pt-12  px-4">
             <form onSubmit={handleSearch} className="space-y-4 animate-slideUp">
 
                 {/* Location Filter */}
