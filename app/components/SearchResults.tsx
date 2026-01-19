@@ -14,7 +14,7 @@ export default function SearchResults({
   showWholesalerDetail,
   setShowWholesalerDetail,
 }: SearchResultsProps) {
-  
+
   return (
     <div className="max-w-6xl mx-auto px-4 py-4 space-y-4">
       {searchResults.length === 0 ? (<h1 className='text-2xl font-bold text-slate-800'>No result found...</h1>) : <h1 className='text-2xl font-bold text-slate-800'>Search results... </h1>}
@@ -54,7 +54,7 @@ export default function SearchResults({
                   <div className="text-xs text-slate-500 font-semibold uppercase tracking-wide mb-1">
                     Distance
                   </div>
-                  <div className="font-bold text-blue-600">{result.distance} KM away</div>
+                  {result?.distance && (<div className="font-bold text-blue-600">{result?.distance || "-"} KM away</div>)}
                 </div>
               </div>
             </div>

@@ -39,7 +39,7 @@ export default function HeroSearch({
     const inputRef = useRef<HTMLInputElement | null>(null)
     const autocompleteRef = useRef<any>(null)
     const debounceTimer = useRef<any>(null)
-    
+
     const handleSearch = async (e: any) => {
         e.preventDefault()
         if (!searchQuery) return
@@ -68,10 +68,7 @@ export default function HeroSearch({
             setIsSearching(false)
             setShowResults(true)
         }
-
-
     }
-
 
     useEffect(() => {
         if (!inputRef.current) return
