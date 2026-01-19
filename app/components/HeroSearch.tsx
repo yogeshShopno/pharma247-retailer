@@ -1,5 +1,5 @@
 import { Search, MapPin, CloudCog } from 'lucide-react'
-import type { GeoLocation ,SearchResult} from '@/app/page'
+import type { GeoLocation, SearchResult } from '@/app/page'
 import { useEffect, useRef } from 'react'
 import { api } from '../lib/api'
 
@@ -13,7 +13,7 @@ export type HeroSearchProps = {
     setLocation: (value: GeoLocation | null) => void
     setIsSearching: (value: boolean) => void
     setShowResults: (value: boolean) => void
-  setSearchResults: (value: SearchResult[]) => void
+    setSearchResults: (value: SearchResult[]) => void
 }
 
 declare global {
@@ -33,19 +33,18 @@ export default function HeroSearch({
     setIsSearching,
     setShowResults,
     setSearchResults
-   
-}: HeroSearchProps
-) {
+
+}: HeroSearchProps) {
+
+    const inputRef = useRef<HTMLInputElement | null>(null)
+    const autocompleteRef = useRef<any>(null)
+    const debounceTimer = useRef<any>(null)
+    
     const handleSearch = async (e: any) => {
         e.preventDefault()
-
         if (!searchQuery) return
         setIsSearching(true)
         setShowResults(false)
-    
-        setTimeout(() => {
-
-        }, 500)
 
         const payload = {
             page: 1,
@@ -61,7 +60,7 @@ export default function HeroSearch({
             })
 
             setSearchResults(response.data.data)
-            
+
         } catch {
             console.error(e)
 
@@ -72,9 +71,7 @@ export default function HeroSearch({
 
 
     }
-    const inputRef = useRef<HTMLInputElement | null>(null)
-    const autocompleteRef = useRef<any>(null)
-    const debounceTimer = useRef<any>(null)
+
 
     useEffect(() => {
         if (!inputRef.current) return

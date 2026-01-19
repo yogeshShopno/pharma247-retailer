@@ -1,15 +1,24 @@
 import { Building2, Phone } from 'lucide-react'
 
-import type { SearchResult} from '@/app/page'
+import type { SearchResult } from '@/app/page'
 
 type SearchResultsProps = {
   searchResults: SearchResult[]
+  showWholesalerDetail: number | null
+  setShowWholesalerDetail: (value: number | null) => void
 }
 
-export default function SearchResults( { searchResults }: SearchResultsProps) {
+
+export default function SearchResults({
+  searchResults,
+  showWholesalerDetail,
+  setShowWholesalerDetail,
+}: SearchResultsProps) {
+  
   return (
     <div className="max-w-6xl mx-auto px-4 py-4 space-y-4">
-      <h1 className='text-2xl font-bold text-slate-800'>Search results... </h1>
+      {searchResults.length === 0 ? (<h1 className='text-2xl font-bold text-slate-800'>No result found...</h1>) : <h1 className='text-2xl font-bold text-slate-800'>Search results... </h1>}
+
       {searchResults.map((result, index) => (
         <div
           key={result.id}
@@ -52,7 +61,7 @@ export default function SearchResults( { searchResults }: SearchResultsProps) {
 
             <div className="flex items-center justify-end space-x-3">
               <button
-                // onClick={() => setSelectedWholesaler(result)}
+                onClick={() => setShowWholesalerDetail(result?.id)}
                 className="flex items-center space-x-2 bg-white hover:bg-slate-50 border-2 border-slate-300 hover:border-blue-600 text-slate-700 hover:text-blue-600 px-5 py-3 rounded-xl font-semibold transition-all duration-300"
               >
                 <Building2 className="w-4 h-4" />
@@ -67,6 +76,7 @@ export default function SearchResults( { searchResults }: SearchResultsProps) {
           </div>
         </div>
       ))}
+
     </div>
   )
 }

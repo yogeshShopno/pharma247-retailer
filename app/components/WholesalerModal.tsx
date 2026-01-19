@@ -1,28 +1,53 @@
+import { useEffect, useState } from 'react'
 import { X } from 'lucide-react'
-import { Search, MapPin, Phone, Clock, Package, AlertCircle, TrendingUp, Mail, Building2, User, Shield, Star, CheckCircle, Navigation, MessageCircle, Globe } from 'lucide-react'
-
-import type { SearchResult} from '@/app/page'
+import { MapPin, Phone, Mail, Building2, User, Navigation, MessageCircle, } from 'lucide-react'
+import { api } from '../lib/api'
+import error from 'next/error'
 
 
 type WholesalerModalProps = {
-  data: SearchResult
+  showWholesalerDetail: number | null
   onClose: () => void
 }
 
-export default function WholesalerModal({ data , onClose }: WholesalerModalProps) {
+export default function WholesalerModal({ showWholesalerDetail, onClose }: WholesalerModalProps) {
+
+  const [wholesalerDetail, serWholesalerDetail] = useState<any>(null)
+  useEffect(() => {
+    if (showWholesalerDetail) {
+      getWholesalerDetail(showWholesalerDetail)
+    }
+  }, [showWholesalerDetail])
 
 
+  const getWholesalerDetail = async (id: number) => {
+    const payload = {
+      page: 1,
+      id: showWholesalerDetail,
+
+    }
+    try {
+      const response = await api('wholesaler-view-details', {
+        method: 'POST',
+        data: payload, // ✅ correct
+      })
+
+      serWholesalerDetail(response?.data[0])
+
+    } catch (error) {
+      console.error(error)
+
+    } finally {
+
+    }
+
+
+  }
   return (
     <div className="fixed inset-0 py-4 bg-black/60 flex items-center justify-center">
-      <div className="bg-white p-6 rounded-xl w-full max-w-xl">
-        <button onClick={onClose} className="float-right">
-          <X />
-        </button>
-        <h2 className="text-xl font-bold">{data.owner_name}</h2>
-        <p>{data.address}</p>
-      </div>
+
       {/* Wholesaler Detail Modal */}
-      {data && (
+      {showWholesalerDetail && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fadeIn">
           <div className="bg-white rounded-3xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto animate-slideUp">
             {/* Modal Header */}
@@ -39,7 +64,7 @@ export default function WholesalerModal({ data , onClose }: WholesalerModalProps
                 </div>
                 <div className="flex">
                   <h2 className="text-lg font-semibold text-white ">
-                    {data.owner_name}
+                    {wholesalerDetail?.firm_name}
                   </h2>
                 </div>
               </div>
@@ -62,7 +87,7 @@ export default function WholesalerModal({ data , onClose }: WholesalerModalProps
                       <div>
                         <div className="text-xs text-slate-500 font-semibold uppercase">Owner Name</div>
                         <div className="font-semibold text-slate-800">
-                          {data.owner_name}
+                          {wholesalerDetail?.owner_name}
                         </div>
                       </div>
                     </div>
@@ -75,7 +100,8 @@ export default function WholesalerModal({ data , onClose }: WholesalerModalProps
                       <div>
                         <div className="text-xs text-slate-500 font-semibold uppercase">Mobile</div>
                         <div className="font-semibold text-slate-800">
-                          {data.owner_name}
+                          {wholesalerDetail?.mobile_number}
+
                         </div>
                       </div>
                     </div>
@@ -88,7 +114,8 @@ export default function WholesalerModal({ data , onClose }: WholesalerModalProps
                       <div>
                         <div className="text-xs text-slate-500 font-semibold uppercase">Email</div>
                         <div className="font-semibold text-slate-800">
-                          {data.email}
+                          {wholesalerDetail?.email}
+
                         </div>
                       </div>
                     </div>
@@ -101,28 +128,12 @@ export default function WholesalerModal({ data , onClose }: WholesalerModalProps
                       <div>
                         <div className="text-xs text-slate-500 font-semibold uppercase">Distance</div>
                         <div className="font-semibold text-slate-800">
-                          {data.distance} KM away
+                          {wholesalerDetail?.address}
+
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
-
-              {/* Address */}
-              <div>
-                <h3 className="text-xl font-semibold text-slate-800 mb-4 flex items-center space-x-2">
-                  <MapPin className="w-4 h-4 text-blue-600" />
-                  <span>Address</span>
-                </h3>
-                <div className="bg-gradient-to-br from-slate-50 to-blue-50 rounded-xl p-5 border border-slate-200">
-                  <p className="text-slate-700 leading-relaxed">
-                    {data.address}
-                  </p>
-                  <button className="bg-gradient-to-br from-slate-50 to-blue-50 mt-4 flex items-center space-x-2 text-white hover:text-white font-semibold transition-colors">
-                    <Navigation className="w-4 h-4" />
-                    <span>Get Directions</span>
-                  </button>
                 </div>
               </div>
 
@@ -132,24 +143,29 @@ export default function WholesalerModal({ data , onClose }: WholesalerModalProps
                 {/* Stats Card */}
                 <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl py-4 px-6 border border-blue-200 mb-4">
                   <div className="text-3xl font-bold text-blue-600 mb-1">
-                    {/* {data.totalProducts.toLocaleString()} */}
+                    {wholesalerDetail?.total_items}
                   </div>
                   <div className="text-sm text-slate-600 font-medium">Total Products</div>
+
                 </div>
 
                 {/* Action Buttons */}
                 <div className="flex flex-col sm:flex-row gap-3">
-                  <button className="flex-1 flex items-center justify-center space-x-2 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-4 py-2.5 rounded-xl font-semibold shadow-lg shadow-green-500/30 transition-all duration-300 hover:shadow-xl">
+                  <button className="flex-1 flex items-center justify-center space-x-2 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-4 py-2.5 rounded-xl shadow-lg shadow-green-500/30 transition-all duration-300 hover:shadow-xl">
                     <Phone className="w-4 h-4" />
                     <span>Call Now</span>
                   </button>
-                  <button className="flex-1 flex items-center justify-center space-x-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-4 py-2.5 rounded-xl font-semibold shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-xl">
+                  <button className="flex-1 flex items-center justify-center space-x-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-4 py-2.5 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-xl">
                     <MessageCircle className="w-4 h-4" />
                     <span>WhatsApp</span>
                   </button>
-                  <button className="flex-1 flex items-center justify-center space-x-2 bg-white hover:bg-slate-50 border-2 border-slate-300 hover:border-blue-600 text-slate-700 hover:text-blue-600 px-4 py-2.5 rounded-xl font-semibold transition-all duration-300">
+                  <button className="flex-1 flex items-center justify-center space-x-2 bg-white hover:bg-slate-50 border-2 border-slate-300 hover:border-blue-600 text-slate-700 hover:text-blue-600 px-4 py-2.5 rounded-xl  transition-all duration-300">
                     <Mail className="w-4 h-4" />
                     <span>Email</span>
+                  </button>
+                  <button className="flex-1 flex items-center justify-center space-x-2 bg-black hover:bg-white-50 border-2 border-slate-300 hover:border-black text-white px-4 py-2.5 rounded-xl  transition-all duration-300">
+                    <MapPin className="w-4 h-4" />
+                    <span>Get Direction</span>
                   </button>
                 </div>
               </div>

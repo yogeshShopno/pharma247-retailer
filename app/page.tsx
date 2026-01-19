@@ -32,6 +32,8 @@ export default function HomePage() {
   const [searchQuery, setSearchQuery] = useState('')
   const [isSearching, setIsSearching] = useState(false)
   const [showResults, setShowResults] = useState(false)
+  const [showWholesalerDetail, setShowWholesalerDetail] =  useState<number | null>(null)
+
   const [location, setLocation] = useState<GeoLocation | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [searchResults, setSearchResults] = useState<SearchResult[]>([])
@@ -81,28 +83,28 @@ export default function HomePage() {
         setIsSearching={setIsSearching}
         setShowResults={setShowResults}
         setSearchResults={setSearchResults}
-
-
       />
-
-
 
       {isSearching ? (
         <SearchLoading searchQuery={searchQuery} />
       ) : showResults ? (
-        <SearchResults searchResults={searchResults} />
+        <SearchResults 
+        searchResults={searchResults}
+        showWholesalerDetail={showWholesalerDetail}
+        setShowWholesalerDetail={setShowWholesalerDetail}         />
       ) : (
         <QuickStats />
       )}
 
 
-      {/* {searchResults && (
+      {showWholesalerDetail && (
         <WholesalerModal
-          data={searchResults}
+        showWholesalerDetail={showWholesalerDetail}
 
-          onClose={() => setSearchResults(null)}
+
+          onClose={() => setShowWholesalerDetail(null)}
         />
-      )} */}
+      )}
 
       <style>{`
         @keyframes fadeIn {
