@@ -87,12 +87,8 @@ export default function Footer() {
             <div className="text-slate-400 text-sm text-center md:text-left">
               © 2026 Pharma247. All rights reserved. | retail pharmacy billing software
             </div>
-
           </div>
         </div>
-
-
-
       </div>
     </footer>
   );

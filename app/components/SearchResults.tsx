@@ -77,8 +77,7 @@ export default function SearchResults({
 
               <button
                 className="w-full sm:w-auto flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-5 py-3 rounded-xl font-semibold shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-xl"
-                onClick={() => (window.location.href = `tel:+91${result?.mobile_number}`)
-                }>
+                onClick={() => (window.location.href = `tel:+91${result?.mobile_number}`)}>
                 <Phone className="w-4 h-4" />
                 <span>Contact</span>
               </button>

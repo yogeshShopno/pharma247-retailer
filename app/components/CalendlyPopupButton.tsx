@@ -30,7 +30,6 @@ export default function CalendlyPopupButton() {
         url: 'https://calendly.com/pharma247official',
       })
     }
-
     document.body.appendChild(script)
   }
 

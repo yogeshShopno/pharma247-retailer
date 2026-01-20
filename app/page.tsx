@@ -94,29 +94,30 @@ export default function HomePage() {
           <SearchLoading searchQuery={searchQuery} />
         ) : showResults && searchResults?.length === 0 ? (
           <div className="flex flex-col justify-center items-center px-4 py-8 sm:py-12">
-            <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl p-6 sm:p-8 md:p-12 max-w-2xl w-full animate-slideUp">
+            <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl max-w-2xl w-full animate-slideUp">
               <Lottie
                 animationData={animationData}
                 loop={true}
                 className="w-32 h-32 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 mx-auto"
               />
-              <h2 className="font-bold text-xl sm:text-2xl md:text-3xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent text-center mt-4 sm:mt-6">
+              <h2 className="font-bold text-xl sm:text-2xl md:text-3xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent text-center">
                 No Results Found
               </h2>
-              <p className="text-slate-600 text-center mt-2 sm:mt-4 text-sm sm:text-base">
-                We couldn't find any matches for "{searchQuery}". Try adjusting your search or increasing the distance.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-6 sm:mt-8 justify-center">
+       
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-3 sm:mt-4 justify-center">
                 <button
                   onClick={() => setShowResults(false)}
-                  className="px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105"
+                  className="px-3 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105"
                 >
                   Try New Search
                 </button>
 
               </div>
+                     <p className="text-slate-600 text-center my-2  sm:my-4 text-sm sm:text-base">
+                We couldn't find any matches for "{searchQuery}". Try adjusting your search or increasing the distance.
+              </p>
             </div>
-            <div className="mt-8 sm:mt-12 w-full">
+            <div className="mt-6 sm:mt-4 w-full">
               <QuickStats />
             </div>
           </div>
@@ -134,9 +135,6 @@ export default function HomePage() {
             <QuickStats />
           </div>
         )}
-
-
-       
       </div>
 
       {/* Modal */}

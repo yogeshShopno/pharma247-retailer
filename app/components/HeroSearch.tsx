@@ -102,8 +102,6 @@ export default function HeroSearch({
         )
     }
 
-
-
     const handleLocationSelect = (
         event: React.SyntheticEvent,
         value: string | PlacePrediction | null,
@@ -129,7 +127,6 @@ export default function HeroSearch({
         )
     }
 
-
     const handleSearch = async (e: any) => {
         e.preventDefault()
         if (!searchQuery) return
@@ -143,7 +140,6 @@ export default function HeroSearch({
             longitude: location?.lng,
             distance: distance,
         }
-
         try {
             const response = await api('search-item', {
                 method: 'POST',
@@ -167,7 +163,7 @@ export default function HeroSearch({
     >
       {/* Location + Distance */}
       <div className="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
-        <div className="flex flex-col sm:flex-row sm:items-center gap-3 p-3 sm:p-4">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-3 p-3 sm:p-3x">
           {/* Location */}
           <div className="flex-1 flex items-center gap-3 px-2 sm:px-0">
             <MapPin className="w-5 h-5 text-slate-400 shrink-0" />

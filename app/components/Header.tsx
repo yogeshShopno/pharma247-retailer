@@ -29,8 +29,7 @@ export default function Header() {
               shadow-lg shadow-blue-500/30
               transition-all duration-300
               hover:shadow-xl
-              whitespace-nowrap
-            "
+              whitespace-nowrap"
           >
             <User className="w-4 h-4" />
             <span className="hidden sm:inline ">
