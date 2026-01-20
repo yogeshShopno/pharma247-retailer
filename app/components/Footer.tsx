@@ -89,13 +89,9 @@ export default function Footer() {
         <div className="border-t border-slate-700 pt-8">
           <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
             <div className="text-slate-400 text-sm text-center md:text-left">
-              © 2026 Pharma247. All rights reserved. | High Performance Wholesaler Inventory System
+              © 2026 Pharma247. All rights reserved. | retail pharmacy billing software
             </div>
-            <div className="flex items-center space-x-6 text-sm">
-              <a href="#" className="text-slate-400 hover:text-white transition-colors">Privacy Policy</a>
-              <a href="#" className="text-slate-400 hover:text-white transition-colors">Terms of Service</a>
-              <a href="#" className="text-slate-400 hover:text-white transition-colors">Cookie Policy</a>
-            </div>
+ 
           </div>
         </div>
       </div>
