@@ -14,8 +14,8 @@ export default function CalendlyPopupButton() {
   }, [])
 
   const openCalendly = () => {
-    if (Calendly) {
-      Calendly.initPopupWidget({
+    if (window.Calendly) {
+      window.Calendly.initPopupWidget({
         url: 'https://calendly.com/pharma247official',
       })
       return
@@ -26,7 +26,7 @@ export default function CalendlyPopupButton() {
     script.async = true
 
     script.onload = () => {
-      Calendly?.initPopupWidget({
+      window.Calendly?.initPopupWidget({
         url: 'https://calendly.com/pharma247official',
       })
     }
@@ -38,7 +38,7 @@ export default function CalendlyPopupButton() {
     <button
       type="button"
       onClick={openCalendly}
-      className="px-6 py-3 rounded bg-black text-white"
+      className="w-full sm:w-auto flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-5 py-3 rounded-xl font-semibold shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-xl"
     >
       Schedule Demo
     </button>

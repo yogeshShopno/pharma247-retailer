@@ -9,5 +9,7 @@ interface CalendlyNamespace {
 }
 
 declare global {
-  const Calendly: CalendlyNamespace | undefined
+  interface Window {
+    Calendly?: CalendlyNamespace
+  }
 }
