@@ -1,4 +1,5 @@
 import { MapPin, Phone, Package, Mail, MessageCircle, Globe } from 'lucide-react'
+import CalendlyPopupButton from './CalendlyPopupButton';
 
 export default function Footer() {
   const links = [
@@ -9,9 +10,8 @@ export default function Footer() {
     { label: 'About Us', href: 'https://pharma247.in/about-us' },
     { label: 'Privacy Policies', href: 'https://pharma247.in/privacy-policys' },
     { label: 'Terms & Condition', href: 'https://pharma247.in/term-conditions' },
-
-
   ]
+
   return (
     <footer className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
       <div className="max-w-7xl mx-auto px-4 py-12">
@@ -19,24 +19,20 @@ export default function Footer() {
           {/* Company Info */}
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
-                <Package className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-xl font-bold">Pharma247</h3>
+               <img
+                  src="/pharmalogo.webp"
+                  alt="Pharma247"
+                  className="h-10 sm:h-14 w-auto  bg-white p-1 rounded-lg"
+                />
+
+            
             </div>
             <p className="text-slate-400 text-sm leading-relaxed">
               Manage your pharmacy anytime, anywhere with Pharma24*7's cloud-based software, Chemist App & Patient App. Automate billing, inventory, online orders, GST reports, and customer engagement seamlessly. Stay connected and grow your business with ease!
             </p>
             <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-white/10 hover:bg-white/20 rounded-lg flex items-center justify-center cursor-pointer transition-colors">
-                <Globe className="w-4 h-4" />
-              </div>
-              <div className="w-8 h-8 bg-white/10 hover:bg-white/20 rounded-lg flex items-center justify-center cursor-pointer transition-colors">
-                <MessageCircle className="w-4 h-4" />
-              </div>
-              <div className="w-8 h-8 bg-white/10 hover:bg-white/20 rounded-lg flex items-center justify-center cursor-pointer transition-colors">
-                <Mail className="w-4 h-4" />
-              </div>
+
+              <CalendlyPopupButton />
             </div>
           </div>
 
@@ -91,9 +87,12 @@ export default function Footer() {
             <div className="text-slate-400 text-sm text-center md:text-left">
               © 2026 Pharma247. All rights reserved. | retail pharmacy billing software
             </div>
- 
+
           </div>
         </div>
+
+
+
       </div>
     </footer>
   );
