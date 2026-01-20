@@ -247,7 +247,7 @@ export default function HeroSearch({
 
       {/* Search */}
       <div className="bg-white rounded-2xl border border-slate-200 shadow-md hover:shadow-lg transition-shadow">
-        <div className="flex flex-col sm:flex-row sm:items-center gap-3 p-3 sm:p-4">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-3 px-2 py-1 sm:px-3 sm:py-1">
           <div className="flex-1 flex items-center gap-3">
             <Search className="w-5 h-5 text-slate-400 shrink-0" />
             <input
@@ -274,7 +274,7 @@ export default function HeroSearch({
               bg-gradient-to-r from-blue-600 to-indigo-600
               hover:from-blue-700 hover:to-indigo-700
               text-white
-              px-7 py-3 sm:py-3.5
+              px-4 py-3 sm:py-2.5
               rounded-xl
               font-semibold
               shadow-md hover:shadow-lg
