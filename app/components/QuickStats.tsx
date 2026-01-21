@@ -1,11 +1,11 @@
 import { Package, TrendingUp, Clock } from 'lucide-react'
 
 
-export default function QuickStats() {
+export default function QuickStats({totalWholesalers}: {totalWholesalers?: number}) {
   return (
     <div className="max-w-4xl mx-auto grid md:grid-cols-3 gap-4 px-4 py-4">
             {[
-              { label: 'Active Wholesalers', value: '5,247', icon: Package },
+              { label: 'Active Wholesalers', value: totalWholesalers?.toLocaleString() || '5,247', icon: Package },
               { label: 'Product Listings', value: '50M+', icon: TrendingUp },
               { label: 'Daily Updates', value: '24/7', icon: Clock }
             ].map((stat, index) => (

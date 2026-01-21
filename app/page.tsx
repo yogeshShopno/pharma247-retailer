@@ -36,6 +36,7 @@ export default function HomePage() {
   const [location, setLocation] = useState<GeoLocation | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [searchResults, setSearchResults] = useState<SearchResult[]>([])
+  const [totalWholesalers, setTotalWholesalers] = useState(0);
 
   useEffect(() => {
     if (!navigator.geolocation) {
@@ -87,6 +88,7 @@ export default function HomePage() {
           setIsSearching={setIsSearching}
           setShowResults={setShowResults}
           setSearchResults={setSearchResults}
+          setTotalWholesalers={setTotalWholesalers}
         />
 
         {/* Conditional Content */}
@@ -103,7 +105,7 @@ export default function HomePage() {
               <h2 className="font-bold text-xl sm:text-2xl md:text-3xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent text-center">
                 No Results Found
               </h2>
-       
+
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-3 sm:mt-4 justify-center">
                 <button
                   onClick={() => setShowResults(false)}
@@ -113,17 +115,17 @@ export default function HomePage() {
                 </button>
 
               </div>
-                     <p className="text-slate-600 text-center my-2  sm:my-4 text-sm sm:text-base">
+              <p className="text-slate-600 text-center my-2  sm:my-4 text-sm sm:text-base">
                 We couldn't find any matches for "{searchQuery}". Try adjusting your search or increasing the distance.
               </p>
             </div>
             <div className="mt-6 sm:mt-4 w-full">
-              <QuickStats />
+           <QuickStats totalWholesalers={totalWholesalers} />
             </div>
           </div>
         ) : showResults ? (
           <div className="animate-slideUp">
-            <QuickStats />
+              <QuickStats totalWholesalers={totalWholesalers} />
             <SearchResults
               searchResults={searchResults}
               showWholesalerDetail={showWholesalerDetail}
@@ -132,7 +134,7 @@ export default function HomePage() {
           </div>
         ) : (
           <div className="animate-fadeIn">
-            <QuickStats />
+            <QuickStats totalWholesalers={totalWholesalers} />
           </div>
         )}
       </div>
