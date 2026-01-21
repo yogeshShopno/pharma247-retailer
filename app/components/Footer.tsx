@@ -19,13 +19,13 @@ export default function Footer() {
           {/* Company Info */}
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
-               <img
+              <a href="https://pharma247.in/" target="_blank" rel="noopener noreferrer">
+                <img
                   src="/pharmalogo.webp"
                   alt="Pharma247"
                   className="h-10 sm:h-14 w-auto  bg-white p-1 rounded-lg"
                 />
-
-            
+              </a>
             </div>
             <p className="text-slate-400 text-sm leading-relaxed">
               Manage your pharmacy anytime, anywhere with Pharma24*7's cloud-based software, Chemist App & Patient App. Automate billing, inventory, online orders, GST reports, and customer engagement seamlessly. Stay connected and grow your business with ease!
