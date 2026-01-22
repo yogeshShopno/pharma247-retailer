@@ -1,12 +1,15 @@
 'use client'
-import { useEffect, useState } from 'react'
+
+import { Suspense, lazy, useEffect, useState } from 'react'
 import HeroSearch from './components/HeroSearch'
-import QuickStats from './components/QuickStats'
-import SearchResults from './components/SearchResults'
 import SearchLoading from './components/SearchLoading'
 import WholesalerModal from './components/WholesalerModal'
 import Lottie from 'lottie-react'
 import animationData from '@/public/notfound.json'
+
+// ✅ Lazy-loaded components (REAL Suspense usage)
+const QuickStats = lazy(() => import('./components/QuickStats'))
+const SearchResults = lazy(() => import('./components/SearchResults'))
 
 export type GeoLocation = {
   lat: number
@@ -31,16 +34,19 @@ export default function HomePage() {
   const [distance, setDistance] = useState('10')
   const [isSearching, setIsSearching] = useState(false)
   const [showResults, setShowResults] = useState(false)
-  const [showWholesalerDetail, setShowWholesalerDetail] = useState<number | null>(null)
+  const [showWholesalerDetail, setShowWholesalerDetail] =
+    useState<number | null>(null)
   const [location, setLocation] = useState<GeoLocation | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [searchResults, setSearchResults] = useState<SearchResult[]>([])
 
+  // 📍 Get user location
   useEffect(() => {
     if (!navigator.geolocation) {
       setError('Geolocation is not supported')
       return
     }
+
     navigator.geolocation.getCurrentPosition(
       (position) => {
         setLocation({
@@ -74,7 +80,7 @@ export default function HomePage() {
           </h2>
         </div>
 
-        {/* Search Component */}
+        {/* Search */}
         <HeroSearch
           distance={distance}
           setDistance={setDistance}
@@ -89,47 +95,57 @@ export default function HomePage() {
         {/* Conditional Content */}
         {isSearching ? (
           <SearchLoading />
-        ) : showResults && searchResults?.length === 0 ? (
+        ) : showResults && searchResults.length === 0 ? (
           <div className="flex flex-col justify-center items-center px-4 py-8 sm:py-12">
             <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl max-w-2xl w-full animate-slideUp">
               <Lottie
                 animationData={animationData}
-                loop={true}
+                loop
                 className="w-32 h-32 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 mx-auto"
               />
+
               <h2 className="font-bold text-xl sm:text-2xl md:text-3xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent text-center">
                 No Results Found
               </h2>
 
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-3 sm:mt-4 justify-center">
+              <div className="flex justify-center mt-4">
                 <button
                   onClick={() => setShowResults(false)}
                   className="px-3 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105"
                 >
                   Try New Search
                 </button>
-
               </div>
-              <p className="text-slate-600 text-center my-2  sm:my-4 text-sm sm:text-base">
+
+              <p className="text-slate-600 text-center my-4 text-sm sm:text-base">
                 We couldn't find any matches. Try adjusting your search or increasing the distance.
               </p>
             </div>
-            <div className="mt-6 sm:mt-4 w-full">
-           <QuickStats  />
+
+            <div className="mt-6 w-full">
+              <Suspense fallback={null}>
+                <QuickStats />
+              </Suspense>
             </div>
           </div>
         ) : showResults ? (
           <div className="animate-slideUp">
+            <Suspense fallback={null}>
               <QuickStats />
-            <SearchResults
-              searchResults={searchResults}
-        
-              setShowWholesalerDetail={setShowWholesalerDetail}
-            />
+            </Suspense>
+
+            <Suspense fallback={<SearchLoading />}>
+              <SearchResults
+                searchResults={searchResults}
+                setShowWholesalerDetail={setShowWholesalerDetail}
+              />
+            </Suspense>
           </div>
         ) : (
           <div className="animate-fadeIn">
-            <QuickStats />
+            <Suspense fallback={null}>
+              <QuickStats />
+            </Suspense>
           </div>
         )}
       </div>
@@ -142,6 +158,7 @@ export default function HomePage() {
         />
       )}
 
+      {/* Animations */}
       <style jsx>{`
         @keyframes fadeIn {
           from {
@@ -163,52 +180,11 @@ export default function HomePage() {
             transform: translateY(0);
           }
         }
-        @keyframes progress {
-          from {
-            width: 0%;
-          }
-          to {
-            width: 100%;
-          }
-        }
-        @keyframes pulse-slow {
-          0%, 100% {
-            opacity: 0.3;
-            transform: scale(1);
-          }
-          50% {
-            opacity: 0.5;
-            transform: scale(1.1);
-          }
-        }
-        @keyframes bounce-slow {
-          0%, 100% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(-10px);
-          }
-        }
         .animate-fadeIn {
           animation: fadeIn 0.6s ease-out forwards;
         }
         .animate-slideUp {
           animation: slideUp 0.6s ease-out forwards;
-        }
-        .animate-progress {
-          animation: progress 2s ease-in-out;
-        }
-        .animate-pulse-slow {
-          animation: pulse-slow 3s ease-in-out infinite;
-        }
-        .animate-bounce-slow {
-          animation: bounce-slow 2s ease-in-out infinite;
-        }
-        .delay-1000 {
-          animation-delay: 1s;
-        }
-        .delay-2000 {
-          animation-delay: 2s;
         }
       `}</style>
     </div>
