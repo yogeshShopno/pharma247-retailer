@@ -1,6 +1,6 @@
 import { Search, MapPin } from 'lucide-react'
 import type { GeoLocation, SearchResult } from '@/app/page'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import { api } from '../lib/api'
 import { Autocomplete, TextField, MenuItem } from '@mui/material'
 import type {
@@ -70,39 +70,38 @@ export default function HeroSearch({
   // simple in-memory cache
   const cacheRef = useRef<Map<string, ItemOption[]>>(new Map())
 
+  const fetchItems = useCallback(async () => {
+    try {
+      const res = await api('item-list', {
+        method: 'POST',
+        data: {
+          page: 1,
+          search: searchInput,
+        },
+      })
+
+      const data: ItemOption[] = res.data ?? []
+      cacheRef.current.set(searchInput, data)
+      setOptions(data)
+    } catch {
+      setOptions([])
+    }
+  }, [searchInput])
+
   useEffect(() => {
     if (searchInput.trim().length < 2) {
       setOptions([])
       return
     }
 
-    // cache hit → no API call
     if (cacheRef.current.has(searchInput)) {
       setOptions(cacheRef.current.get(searchInput)!)
       return
     }
 
-    const fetchItems = async () => {
-      try {
-        const res = await api('item-list', {
-          method: 'POST',
-          data: {
-            page: 1,
-            search: searchInput,
-          },
-        })
-
-        const data: ItemOption[] = res.data ?? []
-        cacheRef.current.set(searchInput, data)
-
-        setOptions(data)
-      } catch {
-        setOptions([])
-      }
-    }
-
     fetchItems()
-  }, [searchInput])
+  }, [searchInput, fetchItems])
+
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -121,6 +120,10 @@ export default function HeroSearch({
 
     return () => clearInterval(interval)
   }, [])
+
+  const selectedDistanceOption = useMemo(() => {
+    return DISTANCE_OPTIONS.find((o) => o.value === distance)
+  }, [distance])
 
   const handleLocationInputChange = (event: any, value: string) => {
     setLocationInput(value)
@@ -174,33 +177,40 @@ export default function HeroSearch({
     )
   }
 
-  const handleSearch = async (e: any) => {
-    e.preventDefault()
-    if (!selectedItemId) return
-    setIsSearching(true)
-    setShowResults(false)
+  const handleSearch = useCallback(
+    async (e: any) => {
+      e.preventDefault()
+      if (!selectedItemId) return
 
-    const payload = {
-      page: 1,
-      item_name: selectedItemId,
-      latitude: location?.lat,
-      longitude: location?.lng,
-      distance: distance,
-    }
-    try {
-      const response = await api('search-item', {
-        method: 'POST',
-        data: payload,
-      })
+      setIsSearching(true)
+      setShowResults(false)
 
-      setSearchResults(response.data.data)
-    } catch (error) {
-      console.error(error)
-    } finally {
-      setIsSearching(false)
-      setShowResults(true)
-    }
-  }
+      const payload = {
+        page: 1,
+        item_name: selectedItemId,
+        latitude: location?.lat,
+        longitude: location?.lng,
+        distance,
+      }
+
+      try {
+        const response = await api('search-item', {
+          method: 'POST',
+          data: payload,
+        })
+
+        setSearchResults(response.data.data)
+      } catch (error) {
+        console.error(error)
+      } finally {
+        setIsSearching(false)
+        setShowResults(true)
+      }
+    },
+    [selectedItemId, location, distance, setIsSearching, setShowResults, setSearchResults]
+  )
+
+
 
   return (
     <section className="max-w-5xl mx-auto pt-6 sm:pt-12 px-4">
@@ -258,7 +268,7 @@ export default function HeroSearch({
             {/* Distance */}
             <div className="sm:border-l border-slate-200 sm:pl-3">
               <Autocomplete
-                value={DISTANCE_OPTIONS.find((o) => o.value === distance)}
+                value={selectedDistanceOption}
                 onChange={(e, v) => v && setDistance(v.value)}
                 options={DISTANCE_OPTIONS}
                 getOptionLabel={(option) => option.label}
@@ -329,7 +339,7 @@ export default function HeroSearch({
                 outline-none
                 text-slate-700
                 placeholder:text-slate-400
-              "
+"
                   />
                 )}
               />
