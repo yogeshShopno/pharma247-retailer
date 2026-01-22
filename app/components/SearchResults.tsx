@@ -4,15 +4,16 @@ import type { SearchResult } from '@/app/page'
 
 type SearchResultsProps = {
   searchResults: SearchResult[]
-  showWholesalerDetail: number | null
+
   setShowWholesalerDetail: (value: number | null) => void
 }
 
 export default function SearchResults({
   searchResults,
-  showWholesalerDetail,
+
   setShowWholesalerDetail,
 }: SearchResultsProps) {
+  console.log('Rendering SearchResults with', searchResults);
   return (
     <div className="max-w-6xl mx-auto px-4 py-4 space-y-4">
 
@@ -34,7 +35,7 @@ export default function SearchResults({
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div>
                   <div className="text-xs text-slate-500 font-semibold uppercase mb-1">
-                    Wholesaler
+                    {result.business_type}
                   </div>
                   <div className="font-semibold text-slate-800 break-words">
                     {result.owner_name}

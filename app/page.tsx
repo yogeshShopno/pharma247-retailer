@@ -21,7 +21,7 @@ export type SearchResult = {
   mobile_number: string
   quantity: number
   price: number
-  wholesaler: string
+  business_type: string
   address: string
   city: string
   distance: number
@@ -126,7 +126,7 @@ export default function HomePage() {
               <QuickStats />
             <SearchResults
               searchResults={searchResults}
-              showWholesalerDetail={showWholesalerDetail}
+        
               setShowWholesalerDetail={setShowWholesalerDetail}
             />
           </div>
