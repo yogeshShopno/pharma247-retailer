@@ -20,7 +20,7 @@ export type HeroSearchProps = {
   setIsSearching: (value: boolean) => void
   setShowResults: (value: boolean) => void
   setSearchResults: (value: SearchResult[]) => void
-  setTotalWholesalers: (value: number) => void
+
 }
 
 declare global {
@@ -61,7 +61,6 @@ export default function HeroSearch({
   setIsSearching,
   setShowResults,
   setSearchResults,
-  setTotalWholesalers
 }: HeroSearchProps) {
   const [locationInput, setLocationInput] = useState('')
   const [predictions, setPredictions] = useState<PlacePrediction[]>([])
@@ -99,7 +98,7 @@ export default function HeroSearch({
 
         const data: ItemOption[] = res.data ?? []
         cacheRef.current.set(searchInput, data)
-        setTotalWholesalers(res.total_wholesaler);
+
         setOptions(data)
       } catch {
         setOptions([])

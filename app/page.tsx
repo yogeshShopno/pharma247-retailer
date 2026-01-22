@@ -36,7 +36,6 @@ export default function HomePage() {
   const [location, setLocation] = useState<GeoLocation | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [searchResults, setSearchResults] = useState<SearchResult[]>([])
-  const [totalWholesalers, setTotalWholesalers] = useState(0);
 
   useEffect(() => {
     if (!navigator.geolocation) {
@@ -88,7 +87,6 @@ export default function HomePage() {
           setIsSearching={setIsSearching}
           setShowResults={setShowResults}
           setSearchResults={setSearchResults}
-          setTotalWholesalers={setTotalWholesalers}
         />
 
         {/* Conditional Content */}
@@ -120,12 +118,12 @@ export default function HomePage() {
               </p>
             </div>
             <div className="mt-6 sm:mt-4 w-full">
-           <QuickStats totalWholesalers={totalWholesalers} />
+           <QuickStats  />
             </div>
           </div>
         ) : showResults ? (
           <div className="animate-slideUp">
-              <QuickStats totalWholesalers={totalWholesalers} />
+              <QuickStats />
             <SearchResults
               searchResults={searchResults}
               showWholesalerDetail={showWholesalerDetail}
@@ -134,7 +132,7 @@ export default function HomePage() {
           </div>
         ) : (
           <div className="animate-fadeIn">
-            <QuickStats totalWholesalers={totalWholesalers} />
+            <QuickStats />
           </div>
         )}
       </div>
