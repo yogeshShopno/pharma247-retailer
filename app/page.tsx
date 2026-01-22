@@ -29,7 +29,6 @@ export type SearchResult = {
 
 export default function HomePage() {
   const [distance, setDistance] = useState('10')
-  const [searchQuery, setSearchQuery] = useState('')
   const [isSearching, setIsSearching] = useState(false)
   const [showResults, setShowResults] = useState(false)
   const [showWholesalerDetail, setShowWholesalerDetail] = useState<number | null>(null)
@@ -79,10 +78,8 @@ export default function HomePage() {
         <HeroSearch
           distance={distance}
           setDistance={setDistance}
-          searchQuery={searchQuery}
           location={location}
           isSearching={isSearching}
-          setSearchQuery={setSearchQuery}
           setLocation={setLocation}
           setIsSearching={setIsSearching}
           setShowResults={setShowResults}
@@ -91,7 +88,7 @@ export default function HomePage() {
 
         {/* Conditional Content */}
         {isSearching ? (
-          <SearchLoading searchQuery={searchQuery} />
+          <SearchLoading />
         ) : showResults && searchResults?.length === 0 ? (
           <div className="flex flex-col justify-center items-center px-4 py-8 sm:py-12">
             <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl max-w-2xl w-full animate-slideUp">
@@ -114,7 +111,7 @@ export default function HomePage() {
 
               </div>
               <p className="text-slate-600 text-center my-2  sm:my-4 text-sm sm:text-base">
-                We couldn't find any matches for "{searchQuery}". Try adjusting your search or increasing the distance.
+                We couldn't find any matches. Try adjusting your search or increasing the distance.
               </p>
             </div>
             <div className="mt-6 sm:mt-4 w-full">

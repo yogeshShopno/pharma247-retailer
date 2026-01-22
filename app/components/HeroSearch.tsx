@@ -12,10 +12,8 @@ import type {
 export type HeroSearchProps = {
   distance: string
   setDistance: (value: string) => void
-  searchQuery: string
   location: GeoLocation | null
   isSearching: boolean
-  setSearchQuery: (value: string) => void
   setLocation: (value: GeoLocation | null) => void
   setIsSearching: (value: boolean) => void
   setShowResults: (value: boolean) => void
@@ -53,10 +51,8 @@ const DISTANCE_OPTIONS = [
 export default function HeroSearch({
   distance,
   setDistance,
-  searchQuery,
   location,
   isSearching,
-  setSearchQuery,
   setLocation,
   setIsSearching,
   setShowResults,
